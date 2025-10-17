@@ -88,7 +88,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#6366F1" />
         <meta name="format-detection" content="telephone=no" />
       </head>
-      <body className="font-sans antialiased bg-white text-neutral-900" suppressHydrationWarning>
+      <body className="font-sans antialiased bg-background text-primary" suppressHydrationWarning>
         {children}
 
         {/* Structured Data (JSON-LD) */}

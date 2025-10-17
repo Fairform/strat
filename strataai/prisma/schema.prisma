@@ -1,0 +1,44 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Meeting {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now()) @map("created_at")
+
+  // Form data
+  buildingSize String   @map("building_size")
+  state        String
+  meetingType  String   @map("meeting_type")
+  buildingName String   @map("building_name")
+  meetingDate  DateTime @map("meeting_date")
+  email        String
+
+  // File info
+  uploadUrl    String?  @map("upload_url")
+  fileName     String?  @map("file_name")
+  fileSize     BigInt?  @map("file_size")
+
+  // Processing
+  status       String   @default("pending") // pending, processing, completed, failed
+  processedAt  DateTime? @map("processed_at")
+
+  // Payment
+  stripeSessionId String? @unique @map("stripe_session_id")
+  stripePaymentId String? @map("stripe_payment_id")
+  amountPaid      Int?    @map("amount_paid") // in cents
+
+  // Output
+  minutesDocxUrl String? @map("minutes_docx_url")
+  minutesPdfUrl  String? @map("minutes_pdf_url")
+
+  @@map("meetings")
+}
