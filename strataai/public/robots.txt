@@ -1,0 +1,11 @@
+# robots.txt for Strata AI
+
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Disallow admin and api routes
+Disallow: /api/
+
+# Sitemap
+Sitemap: https://strata-ai.com/sitemap.xml
