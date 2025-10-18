@@ -23,11 +23,22 @@ model User {
   verified  Boolean  @default(false)
   twoFactorEnabled Boolean @default(false) @map("two_factor_enabled")
 
+  // Subscription
+  stripeCustomerId String? @unique @map("stripe_customer_id")
+  subscriptionId   String? @unique @map("subscription_id")
+  subscriptionStatus String? @map("subscription_status") // active, canceled, past_due, trialing
+  plan             String? // start, scale, pro
+  planUnitLimit    Int?    @map("plan_unit_limit")
+  trialEndsAt      DateTime? @map("trial_ends_at")
+  subscriptionEndsAt DateTime? @map("subscription_ends_at")
+
   // Relations
   buildings    Building[]
+  properties   Property[]
   meetings     Meeting[]
   documents    Document[]
   notifications Notification[]
+  tenantCommunications TenantCommunication[]
 
   @@map("users")
 }
@@ -133,4 +144,91 @@ model Notification {
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("notifications")
+}
+
+model Property {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Property details
+  name        String
+  address     String
+  city        String?
+  state       String?
+  postcode    String?
+  propertyType String @map("property_type") // apartment, townhouse, house
+
+  // Build-to-rent specific
+  totalUnits  Int      @map("total_units")
+  occupiedUnits Int    @default(0) @map("occupied_units")
+  completionDate DateTime? @map("completion_date")
+
+  // Financials
+  averageRent Decimal? @map("average_rent") @db.Decimal(10, 2)
+  totalRevenue Decimal? @map("total_revenue") @db.Decimal(12, 2)
+
+  // Status
+  status      String   @default("active") // active, inactive, development
+
+  // Relations
+  userId      String   @map("user_id")
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  units       Unit[]
+  tenantCommunications TenantCommunication[]
+
+  @@map("properties")
+}
+
+model Unit {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Unit details
+  unitNumber  String   @map("unit_number")
+  floor       Int?
+  bedrooms    Int
+  bathrooms   Decimal  @db.Decimal(3, 1)
+  squareMeters Decimal? @map("square_meters") @db.Decimal(8, 2)
+
+  // Tenancy
+  tenantName  String?  @map("tenant_name")
+  tenantEmail String?  @map("tenant_email")
+  tenantPhone String?  @map("tenant_phone")
+  leaseStart  DateTime? @map("lease_start")
+  leaseEnd    DateTime? @map("lease_end")
+  rentAmount  Decimal?  @map("rent_amount") @db.Decimal(10, 2)
+
+  // Status
+  status      String   @default("vacant") // vacant, occupied, maintenance
+
+  // Relations
+  propertyId  String   @map("property_id")
+  property    Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+  @@map("units")
+}
+
+model TenantCommunication {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now()) @map("created_at")
+
+  subject   String
+  message   String   @db.Text
+  type      String   // email, sms, notification
+  status    String   @default("sent") // draft, sent, failed
+  sentAt    DateTime? @map("sent_at")
+
+  // Recipients
+  recipientType String @map("recipient_type") // all, property, unit, individual
+  recipientEmails String[] @map("recipient_emails")
+
+  // Relations
+  userId     String   @map("user_id")
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  propertyId String?  @map("property_id")
+  property   Property? @relation(fields: [propertyId], references: [id], onDelete: SetNull)
+
+  @@map("tenant_communications")
 }
