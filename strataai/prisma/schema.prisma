@@ -10,6 +10,54 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now()) @map("created_at")
+
+  email     String   @unique
+  password  String
+  name      String?
+  role      String   @default("manager") // manager, owner, tenant, admin
+  companyName String? @map("company_name")
+  phone     String?
+  verified  Boolean  @default(false)
+  twoFactorEnabled Boolean @default(false) @map("two_factor_enabled")
+
+  // Relations
+  buildings    Building[]
+  meetings     Meeting[]
+  documents    Document[]
+  notifications Notification[]
+
+  @@map("users")
+}
+
+model Building {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now()) @map("created_at")
+
+  name       String
+  street     String?
+  city       String?
+  state      String?
+  postcode   String?
+  unitCount  Int?     @map("unit_count")
+  buildingType String? @map("building_type") // residential, commercial, mixed
+  strataPlanNumber String? @map("strata_plan_number")
+
+  managerName  String? @map("manager_name")
+  managerEmail String? @map("manager_email")
+  managerPhone String? @map("manager_phone")
+
+  // Relations
+  userId    String   @map("user_id")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  meetings  Meeting[]
+  documents Document[]
+
+  @@map("buildings")
+}
+
 model Meeting {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now()) @map("created_at")
@@ -30,6 +78,8 @@ model Meeting {
   // Processing
   status       String   @default("pending") // pending, processing, completed, failed
   processedAt  DateTime? @map("processed_at")
+  transcription Text?
+  errorMessage String? @map("error_message")
 
   // Payment
   stripeSessionId String? @unique @map("stripe_session_id")
@@ -40,5 +90,47 @@ model Meeting {
   minutesDocxUrl String? @map("minutes_docx_url")
   minutesPdfUrl  String? @map("minutes_pdf_url")
 
+  // Relations
+  userId     String?  @map("user_id")
+  user       User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  buildingId String?  @map("building_id")
+  building   Building? @relation(fields: [buildingId], references: [id], onDelete: SetNull)
+
   @@map("meetings")
+}
+
+model Document {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now()) @map("created_at")
+
+  name      String
+  fileUrl   String   @map("file_url")
+  fileSize  BigInt?  @map("file_size")
+  fileType  String?  @map("file_type")
+  category  String?  // minutes, financial, plans, compliance, contracts, correspondence, other
+
+  // Relations
+  userId     String   @map("user_id")
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  buildingId String?  @map("building_id")
+  building   Building? @relation(fields: [buildingId], references: [id], onDelete: SetNull)
+
+  @@map("documents")
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now()) @map("created_at")
+
+  title     String
+  message   String
+  type      String   @default("info") // info, success, warning, error
+  read      Boolean  @default(false)
+  link      String?
+
+  // Relations
+  userId    String   @map("user_id")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("notifications")
 }

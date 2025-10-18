@@ -1,23 +1,21 @@
 import Header from '@/components/Header'
 import Hero from '@/components/Hero'
-import HowItWorks from '@/components/HowItWorks'
-import StateCompliance from '@/components/StateCompliance'
-import UploadPortal from '@/components/UploadPortal'
+import TrustBar from '@/components/TrustBar'
+import Features from '@/components/Features'
 import Pricing from '@/components/Pricing'
-import FAQ from '@/components/FAQ'
+import CTA from '@/components/CTA'
 import Footer from '@/components/Footer'
 
 export default function Page() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-bg">
       <Header />
       <main>
         <Hero />
-        <HowItWorks />
-        <StateCompliance />
-        <UploadPortal />
+        <TrustBar />
+        <Features />
         <Pricing />
-        <FAQ />
+        <CTA />
       </main>
       <Footer />
     </div>

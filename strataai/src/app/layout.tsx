@@ -9,51 +9,51 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'Strata AI - Meeting Minutes in 10 Minutes | Australian Strata & Body Corporate',
+  title: 'Atrio — The Operating System for Build-to-Rent Developers',
   description:
-    'AI-powered strata meeting minutes for NSW, VIC, QLD, SA, WA. Upload your recording, get legally compliant minutes in 10 minutes. From $199 per meeting.',
+    'Atrio helps boutique developers manage leasing, rent, maintenance, and tenants from one elegant platform. The modern operating system for build-to-rent property management.',
   keywords: [
-    'strata minutes',
-    'body corporate minutes',
-    'AGM minutes',
-    'strata meeting',
-    'Australia',
-    'NSW strata',
-    'VIC body corporate',
-    'QLD strata',
-    'meeting transcription',
-    'AI minutes',
-    'strata management',
-    'body corporate management',
+    'build-to-rent',
+    'property management',
+    'real estate software',
+    'developer tools',
+    'BTR management',
+    'rental portfolio',
+    'property operations',
+    'tenant management',
+    'lease management',
+    'Australia property',
+    'property tech',
+    'proptech',
   ],
-  authors: [{ name: 'Strata AI' }],
-  creator: 'Strata AI',
-  publisher: 'Strata AI',
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'https://strata-ai.com'),
+  authors: [{ name: 'Atrio' }],
+  creator: 'Atrio',
+  publisher: 'Atrio',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'https://atrio.com'),
   openGraph: {
     type: 'website',
     locale: 'en_AU',
     url: '/',
-    title: 'Strata AI - Meeting Minutes in 10 Minutes',
+    title: 'Atrio — The Operating System for Build-to-Rent Developers',
     description:
-      'AI-powered strata meeting minutes. Upload recordings, get compliant minutes in 10 minutes. All Australian states.',
-    siteName: 'Strata AI',
+      'Manage leasing, rent, maintenance, and tenants from one elegant platform. The modern operating system for build-to-rent property management.',
+    siteName: 'Atrio',
     images: [
       {
-        url: '/og-image.png',
+        url: '/og-atrio.png',
         width: 1200,
         height: 630,
-        alt: 'Strata AI - AI-powered meeting minutes',
+        alt: 'Atrio - The Operating System for Build-to-Rent Developers',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Strata AI - Meeting Minutes in 10 Minutes',
+    title: 'Atrio — The Operating System for Build-to-Rent Developers',
     description:
-      'AI-powered strata meeting minutes. Upload recordings, get compliant minutes in 10 minutes.',
-    images: ['/og-image.png'],
-    creator: '@strataai',
+      'Manage leasing, rent, maintenance, and tenants from one elegant platform.',
+    images: ['/og-atrio.png'],
+    creator: '@atrio',
   },
   robots: {
     index: true,
@@ -85,7 +85,7 @@ export default function RootLayout({
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#6366F1" />
+        <meta name="theme-color" content="#C4733A" />
         <meta name="format-detection" content="telephone=no" />
       </head>
       <body className="font-sans antialiased bg-background text-primary" suppressHydrationWarning>
@@ -98,12 +98,12 @@ export default function RootLayout({
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'SoftwareApplication',
-              name: 'Strata AI',
+              name: 'Atrio',
               applicationCategory: 'BusinessApplication',
               operatingSystem: 'Web',
               offers: {
                 '@type': 'Offer',
-                price: '199',
+                price: '99',
                 priceCurrency: 'AUD',
               },
               aggregateRating: {
@@ -112,7 +112,7 @@ export default function RootLayout({
                 ratingCount: '127',
               },
               description:
-                'AI-powered strata meeting minutes generator for Australian strata schemes and body corporate meetings.',
+                'The operating system for build-to-rent developers. Manage leasing, rent, maintenance, and tenants from one elegant platform.',
             }),
           }}
         />
@@ -122,19 +122,19 @@ export default function RootLayout({
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'Organization',
-              name: 'Strata AI',
-              url: process.env.NEXT_PUBLIC_APP_URL || 'https://strata-ai.com',
-              logo: `${process.env.NEXT_PUBLIC_APP_URL || 'https://strata-ai.com'}/logo.png`,
+              name: 'Atrio',
+              url: process.env.NEXT_PUBLIC_APP_URL || 'https://atrio.com',
+              logo: `${process.env.NEXT_PUBLIC_APP_URL || 'https://atrio.com'}/atrio-logo.svg`,
               contactPoint: {
                 '@type': 'ContactPoint',
-                telephone: '+61-1300-STRATA',
+                telephone: '+61-1300-ATRIO',
                 contactType: 'Customer Service',
                 areaServed: 'AU',
                 availableLanguage: 'en',
               },
               sameAs: [
-                'https://twitter.com/strataai',
-                'https://linkedin.com/company/strata-ai',
+                'https://twitter.com/atrio',
+                'https://linkedin.com/company/atrio',
               ],
             }),
           }}

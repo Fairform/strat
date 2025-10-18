@@ -1,117 +1,101 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function Footer() {
   return (
-    <footer className="bg-background border-t border-border py-16">
-      <div className="container mx-auto">
-        <div className="grid md:grid-cols-4 gap-12 mb-12">
-          {/* Column 1: Brand */}
+    <footer className="bg-surface border-t border-border py-12">
+      <div className="container mx-auto px-6">
+        <div className="grid md:grid-cols-3 gap-12 mb-8">
+          {/* Column 1: Logo & Description */}
           <div>
-            <h3 className="text-heading-lg font-bold text-primary mb-4">
-              Strata AI
-            </h3>
-            <p className="text-body-sm text-secondary">
-              AI-powered meeting minutes for Australian strata schemes. Fast, compliant, and affordable.
+            <Image
+              src="/atrio-logo.svg"
+              alt="Atrio"
+              width={100}
+              height={32}
+              className="mb-4"
+            />
+            <p className="text-small text-text-muted">
+              The Operating System for Build-to-Rent Developers
             </p>
           </div>
 
-          {/* Column 2: Product */}
+          {/* Column 2: Product Links */}
           <div>
-            <h4 className="text-body-md font-medium text-primary mb-4">
-              Product
-            </h4>
-            <ul className="space-y-3">
+            <h4 className="text-text font-semibold mb-4">Product</h4>
+            <ul className="space-y-2">
               <li>
-                <Link href="#how-it-works" className="text-body-sm text-secondary hover:text-primary transition-colors">
-                  How it Works
+                <Link href="/features" className="text-text-muted hover:text-accent transition">
+                  Features
                 </Link>
               </li>
               <li>
-                <Link href="#pricing" className="text-body-sm text-secondary hover:text-primary transition-colors">
+                <Link href="/pricing" className="text-text-muted hover:text-accent transition">
                   Pricing
                 </Link>
               </li>
               <li>
-                <Link href="#faq" className="text-body-sm text-secondary hover:text-primary transition-colors">
-                  FAQ
+                <Link href="/docs" className="text-text-muted hover:text-accent transition">
+                  Documentation
                 </Link>
               </li>
               <li>
-                <Link href="#upload" className="text-body-sm text-secondary hover:text-primary transition-colors">
-                  Demo
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Column 3: Legal */}
-          <div>
-            <h4 className="text-body-md font-medium text-primary mb-4">
-              Legal
-            </h4>
-            <ul className="space-y-3">
-              <li>
-                <Link href="/privacy" className="text-body-sm text-secondary hover:text-primary transition-colors">
-                  Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link href="/terms" className="text-body-sm text-secondary hover:text-primary transition-colors">
-                  Terms of Service
-                </Link>
-              </li>
-              <li>
-                <Link href="/refund" className="text-body-sm text-secondary hover:text-primary transition-colors">
-                  Refund Policy
+                <Link href="/changelog" className="text-text-muted hover:text-accent transition">
+                  Changelog
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Column 4: Contact */}
+          {/* Column 3: Company Links */}
           <div>
-            <h4 className="text-body-md font-medium text-primary mb-4">
-              Contact
-            </h4>
-            <ul className="space-y-3">
+            <h4 className="text-text font-semibold mb-4">Company</h4>
+            <ul className="space-y-2">
               <li>
-                <a href="mailto:support@strata-ai.com" className="text-body-sm text-secondary hover:text-primary transition-colors">
-                  support@strata-ai.com
-                </a>
+                <Link href="/about" className="text-text-muted hover:text-accent transition">
+                  About
+                </Link>
               </li>
               <li>
-                <a href="tel:1300787282" className="text-body-sm text-secondary hover:text-primary transition-colors">
-                  1300 STRATA AI
-                </a>
+                <Link href="/contact" className="text-text-muted hover:text-accent transition">
+                  Contact
+                </Link>
+              </li>
+              <li>
+                <Link href="/privacy" className="text-text-muted hover:text-accent transition">
+                  Privacy
+                </Link>
+              </li>
+              <li>
+                <Link href="/terms" className="text-text-muted hover:text-accent transition">
+                  Terms
+                </Link>
               </li>
             </ul>
           </div>
         </div>
 
         {/* Bottom bar */}
-        <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center">
-          <p className="text-body-sm text-secondary mb-4 md:mb-0">
-            © 2025 Strata AI. All rights reserved.
+        <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-border">
+          <p className="text-small text-text-muted mb-4 md:mb-0">
+            © 2025 Atrio. All rights reserved.
           </p>
-          <div className="flex space-x-6">
-            <a
+
+          <div className="flex gap-6">
+            <Link
               href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-secondary hover:text-primary transition-colors"
+              className="text-text-muted hover:text-accent transition"
             >
               LinkedIn
-            </a>
-            <a
+            </Link>
+            <Link
               href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-secondary hover:text-primary transition-colors"
+              className="text-text-muted hover:text-accent transition"
             >
               Twitter
-            </a>
+            </Link>
           </div>
         </div>
       </div>

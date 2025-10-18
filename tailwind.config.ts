@@ -9,14 +9,20 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: '#0A0A0A',
-        surface: '#151515',
-        'surface-elevated': '#1F1F1F',
-        primary: '#FFFFFF',
-        secondary: '#A3A3A3',
-        accent: '#2563EB',
-        border: '#262626',
-        success: '#10B981',
+        bg: '#F6F5F2',
+        surface: '#FFFFFF',
+        text: '#101820',
+        'text-muted': '#4A545C',
+        accent: '#C4733A',
+        'accent-light': '#DDA56C',
+        border: '#E1E1E0',
+        success: '#3B6C57',
+        error: '#C45041',
+        warning: '#D4A574',
+        // Legacy compatibility
+        background: '#F6F5F2',
+        primary: '#101820',
+        secondary: '#4A545C',
       },
       fontFamily: {
         sans: ['var(--font-inter)', 'system-ui', '-apple-system', 'sans-serif'],
